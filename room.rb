@@ -20,20 +20,21 @@ class Room
     self << switch
   end
 
-  def test
-    for i in 0..(@switches.length-1) do
-      @switches[i].test
-    end
-  end
-
   def <<(switch)
     if switch
-      @switches << switch
+      # In case switch is an array of switches already
+      if switch.is_a?(Array)
+        switch.map do |s|
+          @switches.push(s)
+        end
+      else
+        @switches << switch
+      end
     end
   end
 
   def remove_switch(name)
-    @switches.select { |switch| switch.name == name}.map {|switch| switch.delete}
+    @switches.select { |switch| switch.name == name}.map(&:cleanup)
     @switches.reject! {|switch| switch.name == name}
   end
 
@@ -55,12 +56,5 @@ class Room
 
   def num_switches
     @switches.length
-  end
-
-  def get_info
-    # if self.num_switches > 0
-    # return switch.info for all switches
-    # else
-    # return "no switches in room"
   end
 end
