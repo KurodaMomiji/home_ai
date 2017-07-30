@@ -66,11 +66,19 @@ class RoomTest < Test::Unit::TestCase
       assert room.switches == [s1]
     end
 
-  def test_push_method_case_array
+  def test_push_method_case_array_of_switch
     s1 = Switch.new(17, "Red", false)
     s2 = Switch.new(27, "Green", false)
     room = Room.new("Room")
     room << [s1, s2]
+    assert room.switches == [s1, s2]
+  end
+
+  def test_push_method_case_array_of_switch_and_nil
+    s1 = Switch.new(17, "Red", false)
+    s2 = Switch.new(27, "Green", false)
+    room = Room.new("Room")
+    room << [s1, [s2, nil, [[]]], [1, 2, 3], 1, 3, 5, "hello"]
     assert room.switches == [s1, s2]
   end
 

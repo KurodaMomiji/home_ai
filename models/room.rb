@@ -1,6 +1,3 @@
-require 'rpi_gpio'
-require './switch'
-
 class Room
   attr_accessor :name, :switches
   # Attributes
@@ -21,15 +18,10 @@ class Room
   end
 
   def <<(switch)
-    if switch
-      # In case switch is an array of switches already
-      if switch.is_a?(Array)
-        switch.map do |s|
-          @switches.push(s)
-        end
-      else
-        @switches << switch
-      end
+    if switch.is_a?(Switch)
+      @switches << switch
+    elsif switch.is_a?(Array)
+      switch.each {|s| self << s}
     end
   end
 

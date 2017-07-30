@@ -1,6 +1,3 @@
-# Class Switch definition
-require 'rpi_gpio'
-
 class Switch
   attr_accessor :name, :pin
   # Attributes / State / Data
