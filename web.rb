@@ -5,12 +5,14 @@ require 'sinatra'
 set :port, 3000
 set :bind, '0.0.0.0'
 
-puts ENV.inspect
+before do
+  # content_type 'application/json'
+  content_type 'text/plain'
+end
 
 # Actions
-
-get '/' do
-	'Hello world!'
+get '/rooms' do
+    DB::Room.all.map {|room| "\n" + room.to_s}.join
 end
 
 get '/hello/:name' do
