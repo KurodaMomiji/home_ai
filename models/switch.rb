@@ -27,13 +27,12 @@ class Switch
     @name
   end
 
-  def to_json(*a)
+  def to_json(*args)
     {
-      "json_class" => self.class.name,
-      "data" => {
-        "elements" => [@name, @pin.to_s, self.state]
-      }
-    }.to_json(*a)
+      name: @name,
+      pin: @pin,
+      state: self.state
+    }.to_json(args)
   end
 
   def state

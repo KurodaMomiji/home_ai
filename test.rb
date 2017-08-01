@@ -111,6 +111,17 @@ class RoomTest < Test::Unit::TestCase
     refute s3.state
   end
 
+  def test_to_json
+    s1 = Switch.new(17, "Red", true)
+    room = Room.new("Room", s1)
+    assert room.to_json == {
+      "room_name": "Room",
+      "data" => {
+        "elements" => room.switches.map(&:to_json)
+      }
+    }.to_json()
+  end
+
   def teardown
     RPi::GPIO.clean_up
   end
