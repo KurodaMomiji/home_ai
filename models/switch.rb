@@ -27,6 +27,15 @@ class Switch
     @name
   end
 
+  def to_json(*a)
+    {
+      "json_class" => self.class.name,
+      "data" => {
+        "elements" => [@name, @pin.to_s, self.state]
+      }
+    }.to_json(*a)
+  end
+
   def state
     # Returns boolean true if it is on
     RPi::GPIO.high? @pin

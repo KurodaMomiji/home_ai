@@ -2,6 +2,7 @@
 require 'rpi_gpio'
 require_relative 'models/switch'
 require_relative 'models/room'
+require 'json'
 
 RPi::GPIO.set_numbering :bcm
 
@@ -24,5 +25,6 @@ module DB
 	end
 end
 
-# catch the exit signal (on ctrl+c), (ctrl+d - kill), then run clean_up
+# catch the exit signal (on ctrl+c), (ctrl+d - kill),
+# then run clean_up
 at_exit { RPi::GPIO.clean_up }

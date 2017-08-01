@@ -12,7 +12,7 @@ end
 
 # Actions
 get '/rooms' do
-    DB::Room.all.map {|room| "\n" + room.to_s}.join
+    DB::Room.all.map {|room| "\n" + room.to_json}.join
 end
 
 get '/hello/:name' do

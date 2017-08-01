@@ -31,7 +31,16 @@ class Room
   end
 
   def to_s # Need help with this
-    @name + "\n" + @switches.map(&:to_s).join("\n") + "\n"
+    @name  + "\n" + @switches.map(&:to_s).join("\n") + "\n"
+  end
+
+  def to_json()
+    {
+      "json_class" => self.class.name,
+      "data" => {
+        "elements" => [@name, @switches.map(&:to_json)]
+      }
+    }.to_json()
   end
 
   def all_on
