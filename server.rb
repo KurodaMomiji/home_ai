@@ -6,13 +6,13 @@ set :port, 3000
 set :bind, '0.0.0.0'
 
 before do
-  # content_type 'application/json'
-  content_type 'text/plain'
+  content_type 'application/json'
+  #content_type 'text/plain'
 end
 
 # Actions
 get '/rooms' do
-    DB::Room.all.map {|room| "\n" + room.to_json}.join
+    DB::Room.all.to_json
 end
 
 get '/hello/:name' do
