@@ -15,6 +15,10 @@ get '/rooms' do
     DB::Room.all.to_json
 end
 
+get '/rooms/:name' do |name|
+    DB::Room.find(name).to_json
+end
+
 get '/hello/:name' do
 	# matches "GET /hello/foo" and "GET /hello/bar/"
 	# params['name'] is 'foo' or 'bar'

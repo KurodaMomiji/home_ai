@@ -22,6 +22,10 @@ module DB
 		def self.all
 			@@rooms
 		end
+
+		def self.find(name)
+			@@rooms.select {|room| room.name == name}
+		end
 	end
 end
 
