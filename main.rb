@@ -3,10 +3,20 @@ require 'rpi_gpio'
 require_relative 'models/switch'
 require_relative 'models/room'
 require 'json'
-
+require 'sequel'
+# Set pin numbering system for GPIO
 RPi::GPIO.set_numbering :bcm
 
 # Initialize Objects
+## Database
+
+DB = Sequel.sqlite # memory database, requires sqlite3
+
+# catch the exit signal (on ctrl+c), (ctrl+d - kill),
+# then run clean_up
+at_exit { RPi::GPIO.clean_up }
+
+## old code
 module DB
 	class Room
 			room = ::Room.new("Computer Room")
@@ -23,8 +33,8 @@ module DB
 			@@rooms
 		end
 
-		def self.find(name)
-			@@rooms.select {|room| room.name == name}
+		5f self.find(name)
+			@@room2s.select {|room| room.name == name}
 		end
 	end
 end
